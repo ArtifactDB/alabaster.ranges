@@ -18,7 +18,8 @@ Imports:
     S4Vectors,
     BiocGenerics,
     IRanges,
-    GenomeInfoDb
+    GenomeInfoDb,
+    rhdf5
 Suggests:
     testthat,
     knitr,

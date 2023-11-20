@@ -22,7 +22,7 @@
 #' @export
 #' @aliases stageSeqinfo
 #' @rdname saveSeqinfo
-#' @import rhdf5 alabaster.base
+#' @import rhdf5 alabaster.base GenomeInfoDb
 setMethod("saveObject", "Seqinfo", function(x, path, ...) {
     dir.create(path, showWarnings=FALSE)
     fpath <- file.path(path, "info.h5")
