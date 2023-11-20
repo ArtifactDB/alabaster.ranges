@@ -22,8 +22,9 @@
 #' @author Aaron Lun
 #' 
 #' @export
-#' @import rhdf5 methods alabaster.base GenomicRanges
+#' @aliases stageObject,GRanges-method
 #' @rdname saveGRanges
+#' @import rhdf5 methods alabaster.base GenomicRanges
 setMethod("saveObject", "GRanges", function(x, path, ...) {
     dir.create(path, showWarnings=FALSE)
 

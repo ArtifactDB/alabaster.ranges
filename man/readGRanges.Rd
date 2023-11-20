@@ -2,20 +2,21 @@
 % Please edit documentation in R/readGRanges.R
 \name{readGRanges}
 \alias{readGRanges}
-\title{Load a GRanges}
+\alias{loadGRanges}
+\title{Read a GRanges from disk}
 \usage{
 readGRanges(path, ...)
 }
 \arguments{
-\item{path}{String containing a path to the directory, itself created with \code{\link[alabaster.base]{saveObject}} method for \linkS4class{DataFrame}s.}
+\item{path}{String containing a path to a directory, itself created with the \code{\link{stageObject}} method for \linkS4class{GRanges}.}
 
-\item{...}{Further arguments, passed to \code{\link[alabaster.base]{altLoadObject}} for complex nested columns.}
+\item{...}{Further arguments to pass to internal \code{\link{altReadObject}} calls.}
 }
 \value{
 A \linkS4class{GRanges} object.
 }
 \description{
-Load a \linkS4class{GRanges} object based on the metadata saved by the corresponding \code{\link{stageObject}} method.
+Read a \linkS4class{GRanges} object from its on-disk representation.
 }
 \examples{
 gr <- GRanges(c("chrA", "chrB"), IRanges(c(1, 5), c(100, 200)))
@@ -25,4 +26,7 @@ tmp <- tempfile()
 saveObject(gr, tmp)
 readGRanges(tmp)
 
+}
+\seealso{
+\code{"\link{saveObject,GRanges-method}"}, to save a \linkS4class{GRanges} to disk.
 }

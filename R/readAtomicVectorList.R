@@ -12,14 +12,44 @@
 #' library(S4Vectors)
 #' X <- splitAsList(LETTERS, sample(3, 26, replace=TRUE))
 #'
-#' # Staging this object:
 #' tmp <- tempfile()
-#' dir.create(tmp)
-#' info <- stageObject(X, tmp, path="test1")
+#' saveObject(X, tmp)
+#' readAtomicVectorList(tmp)
 #'
-#' # Loading the object:
-#' loadAtomicVectorList(info, tmp)
-#'
+#' @export
+#' @aliases loadAtomicVectorList
+readAtomicVectorList <- function(path, ...) {
+    .read_compressed_list(path, "atomic_vector_list", ...)
+}
+
+#' @import BiocGenerics IRanges rhdf5 alabaster.base
+.read_compressed_list <- function(path, name, ...) {
+    concat <- readObject(file.path(path, "concatenated"), ...)
+
+    fpath <- file.path(path, "partitions.h5")
+    fhandle <- H5Fopen(fpath)
+    on.exit(H5Fclose(fhandle))
+    ghandle <- H5Gopen(fhandle, name)
+    on.exit(H5Gclose(ghandle), add=TRUE, after=FALSE)
+
+    runs <- as.vector(h5read(ghandle, "lengths"))
+    output <- relist(concat, PartitioningByWidth(x=runs))
+    if (alabaster.base:::h5exists(ghandle, "names")) {
+        names(output) <- as.vector(h5read(ghandle, "names"))
+    }
+
+    readMetadata(
+        output, 
+        mcols.path=file.path(path, "element_annotations"),
+        metadata.path=file.path(path, "other_annotations"),
+        ...
+    )
+}
+
+##############################
+######### OLD STUFF ##########
+##############################
+
 #' @export
 loadAtomicVectorList <- function(info, project) {
     concat.info <- acquireMetadata(project, info$atomic_vector_list$concatenated$resource$path)

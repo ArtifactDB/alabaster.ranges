@@ -1,10 +1,14 @@
-#' Load a GRanges
+#' Read a GRanges from disk
 #'
-#' Load a \linkS4class{GRanges} object based on the metadata saved by the corresponding \code{\link{stageObject}} method.
+#' Read a \linkS4class{GRanges} object from its on-disk representation.
 #' 
-#' @inheritParams alabaster.base::loadDataFrame
+#' @param path String containing a path to a directory, itself created with the \code{\link{stageObject}} method for \linkS4class{GRanges}.
+#' @param ... Further arguments to pass to internal \code{\link{altReadObject}} calls.
 #'
 #' @return A \linkS4class{GRanges} object.
+#'
+#' @seealso
+#' \code{"\link{saveObject,GRanges-method}"}, to save a \linkS4class{GRanges} to disk.
 #'
 #' @examples
 #' gr <- GRanges(c("chrA", "chrB"), IRanges(c(1, 5), c(100, 200)))
@@ -15,6 +19,7 @@
 #' readGRanges(tmp)
 #' 
 #' @export
+#' @aliases loadGRanges
 #' @import rhdf5 alabaster.base IRanges GenomicRanges
 readGRanges <- function(path, ...) {
     si <- readObject(file.path(path, "sequence_information"), ...)

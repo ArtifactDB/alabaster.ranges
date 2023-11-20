@@ -2,6 +2,7 @@
 % Please edit documentation in R/saveGRanges.R
 \name{saveObject,GRanges-method}
 \alias{saveObject,GRanges-method}
+\alias{stageObject,GRanges-method}
 \title{Save a GRanges object to disk}
 \usage{
 \S4method{saveObject}{GRanges}(x, path, ...)
