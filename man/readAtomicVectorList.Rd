@@ -8,15 +8,15 @@
 readAtomicVectorList(path, ...)
 }
 \arguments{
-\item{path}{String containing a path to the directory, itself created with \code{\link[alabaster.base]{saveObject}} method for \linkS4class{DataFrame}s.}
+\item{path}{String containing a path to a directory, itself created with the \code{\link{saveObject}} method for \linkS4class{CompressedAtomicList}s.}
 
-\item{...}{Further arguments, passed to \code{\link[alabaster.base]{altLoadObject}} for complex nested columns.}
+\item{...}{Further arguments, to be passed to internal \code{\link{altReadObject}} calls.}
 }
 \value{
 A CompressedAtomicList of the relevant type.
 }
 \description{
-Load a list of atomic vectors as a \linkS4class{CompressedAtomicList}, typically from files created by the corresponding \code{\link{stageObject}} method.
+Load a list of atomic vectors as a \linkS4class{CompressedAtomicList}, typically from files created by the corresponding \code{\link{saveObject}} method.
 }
 \examples{
 library(S4Vectors)
@@ -26,6 +26,9 @@ tmp <- tempfile()
 saveObject(X, tmp)
 readAtomicVectorList(tmp)
 
+}
+\seealso{
+\code{"\link{saveObject,CompressedAtomicList-method}"}, to save an object to disk.
 }
 \author{
 Aaron Lun

@@ -22,7 +22,7 @@
 #' @aliases loadGRanges
 #' @import rhdf5 alabaster.base IRanges GenomicRanges
 readGRanges <- function(path, ...) {
-    si <- readObject(file.path(path, "sequence_information"), ...)
+    si <- altReadObject(file.path(path, "sequence_information"), ...)
 
     fpath <- file.path(path, "ranges.h5")
     fhandle <- H5Fopen(fpath)

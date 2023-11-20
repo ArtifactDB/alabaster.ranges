@@ -3,7 +3,7 @@
 #' Save a \linkS4class{CompressedAtomicList} object to its on-disk representation.
 #'
 #' @param x A \linkS4class{CompressedAtomicList} object.
-#' @inheritParams alabaster.base::stageObject
+#' @inheritParams alabaster.base::saveObject
 #'
 #' @return 
 #' \code{x} is saved to \code{path}, and \code{NULL} is invisibly returned.
