@@ -8,6 +8,9 @@
 #' @return 
 #' \code{x} is saved to \code{path}, and \code{NULL} is invisibly returned.
 #'
+#' @seealso
+#' \code{\link{readSeqinfo}}, to read a \linkS4class{Seqinfo} from disk.
+#'
 #' @examples
 #' si <- Seqinfo(c("chrA", "chrB"), c(1000, 2000))
 #'

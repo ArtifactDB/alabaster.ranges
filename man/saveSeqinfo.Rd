@@ -9,6 +9,10 @@
 }
 \arguments{
 \item{x}{A \linkS4class{Seqinfo} object.}
+
+\item{path}{String containing the path to a directory in which to save \code{x}.}
+
+\item{...}{Further arguments to pass to specific methods.}
 }
 \value{
 \code{x} is saved to \code{path}, and \code{NULL} is invisibly returned.
@@ -24,4 +28,7 @@ dir.create(tmp)
 saveObject(si, tmp, path="seqinfo")
 list.files(tmp, recursive=TRUE)
 
+}
+\seealso{
+\code{\link{readSeqinfo}}, to read a \linkS4class{Seqinfo} from disk.
 }

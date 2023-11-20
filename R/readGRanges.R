@@ -10,20 +10,47 @@
 #' gr <- GRanges(c("chrA", "chrB"), IRanges(c(1, 5), c(100, 200)))
 #' seqlengths(gr) <- c(chrA=1000, chrB=2000)
 #'
-#' # Staging it:
 #' tmp <- tempfile()
-#' dir.create(tmp)
-#' info <- stageObject(gr, tmp, path="ranges")
-#'
-#' # Now loading it back in:
-#' loadGRanges(info, tmp)
+#' saveObject(gr, tmp)
+#' readGRanges(tmp)
 #' 
 #' @export
-#' @rdname loadGRanges
-#' @importFrom IRanges IRanges
-#' @importFrom GenomicRanges GRanges
-#' @importFrom GenomeInfoDb Seqinfo
-#' @importFrom utils read.csv head
+#' @import rhdf5 alabaster.base IRanges GenomicRanges
+readGRanges <- function(path, ...) {
+    si <- readObject(file.path(path, "sequence_information"), ...)
+
+    fpath <- file.path(path, "ranges.h5")
+    fhandle <- H5Fopen(fpath)
+    on.exit(H5Fclose(fhandle))
+    ghandle <- H5Gopen(fhandle, "genomic_ranges")
+    on.exit(H5Gclose(ghandle), add=TRUE, after=FALSE)
+
+    x <- GRanges(
+        seqnames(si)[as.vector(h5read(ghandle, "sequence")) + 1L],
+        IRanges(
+            as.vector(h5read(ghandle, "start")),
+            width=as.vector(h5read(ghandle, "width"))
+        ),
+        c("-", "*", "+")[as.vector(h5read(ghandle, "strand")) + 1L],
+        seqinfo=si
+    )
+
+    if (alabaster.base:::h5exists(ghandle, "name")) {
+        names(x) <- as.vector(h5read(ghandle, "name"))
+    }
+
+    readMetadata(x, 
+        mcols.path=file.path(path, "range_annotations"),
+        metadata.path=file.path(path, "other_annotations"),
+        ...
+    )
+}
+
+##############################
+######### OLD STUFF ##########
+##############################
+
+#' @export
 loadGRanges <- function(info, project) {
     # First, pulling out the seqinfo.
     si.info <- acquireMetadata(project, info$genomic_ranges$sequence_information$resource$path)
