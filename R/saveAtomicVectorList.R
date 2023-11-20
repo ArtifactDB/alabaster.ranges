@@ -41,7 +41,7 @@ setMethod("saveObject", "CompressedAtomicList", function(x, path, ...) .save_com
     h5createGroup(fpath, name)
 
     lpath <- paste0(name, "/lengths")
-    h5createDataset(fpath, lpath, dim=length(x), H5type="H5T_NATIVE_UINT32")
+    h5createDataset(fpath, lpath, dims=length(x), H5type="H5T_NATIVE_UINT32")
     h5write(lengths(x), fpath, lpath)
 
     if (!is.null(names(x))) {
@@ -57,6 +57,7 @@ setMethod("saveObject", "CompressedAtomicList", function(x, path, ...) .save_com
 ##############################
 
 #' @export
+#' @import S4Vectors
 setMethod("stageObject", "CompressedAtomicList", function(x, dir, path, child=FALSE, group.name="grouping", concat.name="concatenated", mcols.name="mcols", meta.name="other") {
     rd <- DataFrame(values=unlist(x, use.names=FALSE))
     .compressed_stager(x, 

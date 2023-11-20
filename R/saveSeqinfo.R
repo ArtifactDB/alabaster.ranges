@@ -20,7 +20,7 @@
 #' list.files(tmp, recursive=TRUE)
 #'
 #' @export
-#' @aliases stageSeqinfo
+#' @aliases stageObject,Seqinfo-method
 #' @rdname saveSeqinfo
 #' @import rhdf5 alabaster.base GenomeInfoDb
 setMethod("saveObject", "Seqinfo", function(x, path, ...) {
@@ -53,7 +53,7 @@ setMethod("saveObject", "Seqinfo", function(x, path, ...) {
 
     ll <- seqlengths(x)
     len.path <- paste0(name, "/length")
-    h5createDataset(fpath, len.path, dim=length(ll), H5type = "H5T_NATIVE_UINT32")
+    h5createDataset(fpath, len.path, dims=length(ll), H5type = "H5T_NATIVE_UINT32")
     placeholder <- NULL
     if (anyNA(ll)) {
         placeholder <- 2^32 - 1

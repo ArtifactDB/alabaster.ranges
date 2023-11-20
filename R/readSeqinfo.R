@@ -2,7 +2,7 @@
 #'
 #' Read a \linkS4class{Seqinfo} object from its on-disk representation.
 #' 
-#' @param x String containing a path to a directory, itself created with the \code{\link{saveObject}} method for Seqinfo objects.
+#' @param path String containing a path to a directory, itself created with the \code{\link{saveObject}} method for Seqinfo objects.
 #' @param ... Further arguments, ignored.
 #'
 #' @return A \linkS4class{Seqinfo} object.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/saveSeqinfo.R
 \name{saveObject,Seqinfo-method}
 \alias{saveObject,Seqinfo-method}
-\alias{stageSeqinfo}
+\alias{stageObject,Seqinfo-method}
 \title{Save a Seqinfo object to disk}
 \usage{
 \S4method{saveObject}{Seqinfo}(x, path, ...)

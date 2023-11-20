@@ -21,7 +21,7 @@
 #' list.files(tmp, recursive=TRUE)
 #'
 #' @export
-#' @aliases saveObject,CompressedSplitDataFrameList-method
+#' @aliases stageObject,CompressedSplitDataFrameList-method
 #' @rdname saveCompressedSplitDataFrameList
 setMethod("saveObject", "CompressedSplitDataFrameList", function(x, path, ...) .save_compressed_list(x, path=path, name="data_frame_list", ...))
 

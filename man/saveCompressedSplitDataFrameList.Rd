@@ -2,6 +2,7 @@
 % Please edit documentation in R/saveDataFrameList.R
 \name{saveObject,CompressedSplitDataFrameList-method}
 \alias{saveObject,CompressedSplitDataFrameList-method}
+\alias{stageObject,CompressedSplitDataFrameList-method}
 \title{Save compressed lists of data frames to disk}
 \usage{
 \S4method{saveObject}{CompressedSplitDataFrameList}(x, path, ...)

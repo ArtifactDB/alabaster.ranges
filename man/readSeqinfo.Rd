@@ -8,9 +8,9 @@
 readSeqinfo(path, ...)
 }
 \arguments{
-\item{...}{Further arguments, ignored.}
+\item{path}{String containing a path to a directory, itself created with the \code{\link{saveObject}} method for Seqinfo objects.}
 
-\item{x}{String containing a path to a directory, itself created with the \code{\link{saveObject}} method for Seqinfo objects.}
+\item{...}{Further arguments, ignored.}
 }
 \value{
 A \linkS4class{Seqinfo} object.
